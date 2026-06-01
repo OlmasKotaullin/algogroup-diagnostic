@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>БЛОК 2. КАРТА ПРОБЛЕМ ПО НАПРАВЛЕНИЯМ И ЛЮДЯМ — Algo Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#f97316;--accent-light:#fff7ed;--accent-border:#fed7aa;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:#e2e8f0;--bg:#f8fafc;--bg-card:#ffffff;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+strong{font-weight:700}
+
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* ── Sidebar ── */
+.sidebar{background:var(--text);color:#fff;padding:2rem 1.5rem;position:sticky;top:0;height:100vh;overflow-y:auto;max-height:100vh}
+@media (max-width:900px){.sidebar{position:relative;height:auto;max-height:none}}
+.brand{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;font-weight:600}
+.brand-name{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:.3rem}
+.brand-name span{color:var(--accent)}
+.brand-sub{font-size:.8rem;color:#94a3b8;margin-bottom:2rem}
+.nav{display:flex;flex-direction:column;gap:.15rem}
+.nav-item{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .85rem;border-radius:8px;color:#cbd5e1;font-size:.85rem;line-height:1.4;transition:all .15s;border-bottom:none}
+.nav-item:hover{background:rgba(255,255,255,.05);color:#fff;border-bottom:none}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-num{font-family:'Fira Code',monospace;font-size:.7rem;opacity:.7;flex-shrink:0;margin-top:.15rem;min-width:1.5rem}
+.nav-text{flex:1}
+
+/* ── Main ── */
+.main{padding:3rem 3.5rem;max-width:980px}
+@media (max-width:1100px){.main{padding:2rem 1.5rem}}
+.section-meta{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.7rem;font-family:'Fira Code',monospace}
+.section-title{font-size:2.1rem;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:2.5rem;letter-spacing:-.02em}
+@media (max-width:700px){.section-title{font-size:1.6rem}}
+
+/* ── Typography ── */
+.content p{margin-bottom:1.1rem;color:var(--text);font-size:1rem;line-height:1.75}
+.content h2.h2{font-size:1.45rem;font-weight:800;color:var(--text);margin:2.2rem 0 1rem;padding-left:.85rem;border-left:4px solid var(--accent);line-height:1.3}
+.content h3.h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:1.6rem 0 .75rem;line-height:1.35}
+.content ul.list{margin:0 0 1.3rem 0;padding-left:0;list-style:none}
+.content ul.list li{margin-bottom:.85rem;line-height:1.75;color:var(--text)}
+
+/* ── Blockquote (цитаты Алекса/Марии и т.п.) ── */
+.content blockquote.quote{margin:1.6rem 0;padding:1.1rem 1.4rem;border-left:3px solid var(--accent);background:#fafafa;border-radius:0 6px 6px 0}
+.content blockquote.quote p{margin:0 0 .5rem 0;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.6}
+.content blockquote.quote cite{display:block;font-style:normal;font-size:.88rem;color:var(--text-muted);font-weight:500}
+
+/* ── Tables ── */
+.tbl-wrap{overflow-x:auto;margin:1.5rem 0;border-radius:8px;border:1px solid var(--border);background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th{background:var(--bg);text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--text);border-bottom:2px solid var(--border)}
+.tbl td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl p{margin-bottom:.3rem}
+.tbl p:last-child{margin-bottom:0}
+
+/* ── Pagination ── */
+.pagination{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.page-link{flex:1;padding:1.1rem 1.4rem;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;border-bottom:none;color:var(--text);transition:all .15s;max-width:48%}
+.page-link:hover{border-color:var(--accent);background:var(--accent-light);border-bottom:1.5px solid var(--accent)}
+.page-link.next{margin-left:auto;text-align:right}
+.page-link .pl-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.3rem;font-family:'Fira Code',monospace}
+.page-link .pl-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4}
+
+/* ── Footer ── */
+.foot{padding:2rem 0 0;color:var(--text3);font-size:.78rem;text-align:center;border-top:1px solid var(--border);margin-top:4rem}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand-name">Algo <span>Group</span></div>
+  <nav class="nav"><a class="nav-item" href="index.html"><span class="nav-num">00</span><span class="nav-text">Содержание</span></a>
+<a class="nav-item" href="01-цель-аудита.html"><span class="nav-num">01</span><span class="nav-text">Цель аудита</span></a>
+<a class="nav-item" href="02-что-мы-сделали.html"><span class="nav-num">02</span><span class="nav-text">Что мы сделали</span></a>
+<a class="nav-item" href="03-картина-рынка-eld-в-сша-где-algo-group.html"><span class="nav-num">03</span><span class="nav-text">Картина рынка ELD в США. где ALGO GROUP</span></a>
+<a class="nav-item" href="04-стратегические-окна-что-играет-за-и-против-algo-gr.html"><span class="nav-num">04</span><span class="nav-text">Стратегические окна. что играет за и против ALGO GROUP</span></a>
+<a class="nav-item" href="05-сводный-дашборд-по-направлениям.html"><span class="nav-num">05</span><span class="nav-text">Сводный дашборд по направлениям</span></a>
+<a class="nav-item" href="06-экономика-каналов.html"><span class="nav-num">06</span><span class="nav-text">Экономика каналов</span></a>
+<a class="nav-item" href="07-4-блочный-аудит-маркетинга-и-продаж.html"><span class="nav-num">07</span><span class="nav-text">4-блочный аудит маркетинга и продаж</span></a>
+<a class="nav-item" href="08-карта-зрелости-маркетинга.html"><span class="nav-num">08</span><span class="nav-text">Карта зрелости маркетинга</span></a>
+<a class="nav-item" href="09-блок-1-текущая-точка-что-есть-сегодня.html"><span class="nav-num">09</span><span class="nav-text">Блок 1. текущая точка: что есть сегодня?</span></a>
+<a class="nav-item active" href="10-блок-2-карта-проблем-по-направлениям-и-людям.html"><span class="nav-num">10</span><span class="nav-text">Блок 2. карта проблем по направлениям и людям</span></a>
+<a class="nav-item" href="11-блок-3-где-ломается-связка-маркетинг-и-продажи.html"><span class="nav-num">11</span><span class="nav-text">Блок 3. где ломается связка «маркетинг и продажи»</span></a>
+<a class="nav-item" href="12-общий-итог-и-что-делать.html"><span class="nav-num">12</span><span class="nav-text">Общий итог и что делать?</span></a></nav>
+</aside>
+<main class="main">
+
+<div class="section-meta">Раздел 10</div>
+<h1 class="section-title">БЛОК 2. КАРТА ПРОБЛЕМ ПО НАПРАВЛЕНИЯМ И ЛЮДЯМ</h1>
+<div class="content">
+<p><strong>
+</strong></p>
+<h2 class="h2">Мария (руководитель отдела продаж, по факту коммерческий директор)</h2>
+<h3 class="h3"><strong>Что хорошо.
+</strong></h3>
+<p>Отдел продаж: 8 человек. 5 сейлзов (закрывают сделки) и 3 пресейла (квалифицируют входящие заявки и передают сейлзам). Структура понятная. Каждый день команда собирается на встречу 10-15 минут.</p>
+<p>Мария разбирается в продукте, знает свои сегменты клиентов и их реальные боли. Сама провела 100 глубинных интервью с ушедшими клиентами, чтобы понять причины оттока. Сама посчитала стоимость привлечения клиента (CAC, 2 945 долларов) и конверсию из заявки в продажу (2,2%) по нашему запросу. Сама разделила скрипт продаж под заявки из Meta (Facebook и Instagram) на два варианта: один под услугу Safety (помощь новичкам с открытием транспортной компании), другой под ELD. Из 10 задач по диагностике 9 выполнила в срок. На Марию можно опереться.</p>
+<p>Отдельно про Free Trial. Free Trial (бесплатный пробный период подключения ELD) запустила Мария сама. Клиенты, которые через него проходят, подключают в среднем 6 траков. Без него 2. Пожизненная ценность таких клиентов кратно выше. Это ценное продуктовое наблюдение</p>
+<h3 class="h3"><strong>Что критично.
+</strong></h3>
+<p>Сейчас Мария фактически работает как коммерческий директор: руководит отделом продаж из 8 человек, держит связку с маркетингом, проводит глубинные интервью, ведёт переговоры с подрядчиками. Помощника по маркетинговой координации в штате нет. При такой нагрузке риск выгорания высокий, и операционно компания зависит от одного человека. Нужна либо вторая опора (помощник или внешний трекер), либо часть функций надо снять с Марии и распределить по команде.</p>
+<p>Маркетинг и продажи разговаривают через отчёты, а не через цели. Сейчас Мария не ставит маркетингу конкретных задач. Нет плана «нужно столько заявок в неделю», нет запроса «по таким сегментам нам нужны заявки», нет согласованного определения «квалифицированная заявка», которое одинаково понимали бы и продажи, и таргетологи. Взаимодействие идёт через ежемесячные отчёты, и это формат информирования, не обратной связи.</p>
+<p>Скорость поддержки клиентов. По данным глубинных интервью с 100 ушедшими, 19% указали причиной то, что поддержка перестаёт отвечать или отвечает медленно. Это та же проблема скорости обработки контактов, что и на входе, где 40-50% горячих заявок не дозваниваются. Решение одно для обоих случаев: норматив скорости ответа в 5 минут, одинаково для входящих заявок и для текущих клиентов.</p>
+<h2 class="h2">Алекс (Google Ads и SEO, аутсорс)</h2>
+<h3 class="h3">Что хорошо.</h3>
+<p>Стабильный канал. Стоимость заявки (CPL) держится в районе 32-34 долларов уже больше года. До 170 заявок в месяц при рекламном бюджете 5 000 долларов. По свежим бенчмаркам WordStream за 2025 год это в 2-3 раза дешевле рынка: для B2B в среднем 84 доллара за заявку, для Business Services 103 доллара, по всем индустриям в среднем 70 долларов. У Алекса максимально вычищенная семантика, без информационных запросов.</p>
+<p>SEO за последние 10 месяцев вырос в 4,8 раза по числу показов в выдаче Google. Алекс добавил на сайт упоминание круглосуточной поддержки, многоязычной поддержки и Free Trial. Сам инициирует улучшения и открыто признаёт свои слепые зоны (например, что у него нет картины по продажам).</p>
+<h3 class="h3"><strong>Что критично.
+</strong></h3>
+<p>Алекс работает на аутсорсе за 1 000 долларов в месяц фиксом и ведёт ещё минимум три проекта параллельно. Algo Group для него один из четырёх клиентов. Процента от результата нет, и формат работы построен на объёме часов.</p>
+<p>От отдела продаж Алекс полностью изолирован. Доступа к CRM нет, конверсию из заявки в оплату не видит, профиля реальных клиентов не знает. Брифинга по целевой аудитории не получал.  Поэтому сайт и рекламу делает по конкурентам, а не по данным о клиентах. Коллтрекинга (системы, которая показывает, с какого объявления пришёл звонок) нет, и поэтому атрибутировать звонки к рекламе он не может. В итоге оптимизирует кампании на количество заявок, а не на оплаты.</p>
+<p>На своей верхней части воронки он работает выше рынка. Зона у системы, которая должна дать ему доступ к нижней части воронки (CRM, конверсии, какие тарифы покупают в каких штатах) и встроить в общий ритм команды. Сейчас Алекс работает в одиночку, по одному клиенту из четырёх, и без понимания, куда уходят его лиды.Из-за отсутствия сквозной аналитики, нет оптимизации рекламы на «рекламные связки, которые приносят продажи»</p>
+<h2 class="h2">SMM-агентство (Meta и Instagram, аутсорс из Узбекистана)</h2>
+<h3 class="h3">Что хорошо.</h3>
+<p>Низкий CPL (стоимость заявки) 8,51 доллара. UGC-креативы (видео и фото с реальными людьми, не постановочные) работают.  Охватная кампания держит CPM (стоимость 1 000 показов) на уровне 1,47 доллара, это очень дёшево для США.</p>
+<h3 class="h3">Что критично.</h3>
+<p>Из 70 с лишним заявок в месяц 0 закрытых продаж. UTM-меток (специальных тегов на ссылках, по которым можно проследить путь заявки) нет, поэтому отследить путь лида после его попадания в Telegram-чат невозможно. Кампанией со стороны Algo Group никто не управляет: нет техзадания, нет брифинга по сегментам клиентов, нет понимания, какой креатив сделан под какую аудиторию. Аудитории объявлений пересекаются, две группы конкурируют между собой.</p>
+<p>Сейчас компания получает то, что агентство умеет делать, а не то, что нужно бизнесу. Это типовой паттерн при работе с подрядчиком на аутсорсе без внутреннего владельца. Никто внутри Algo Group не отвечает за результат агентства, агентство отвечает только за свою операционку.</p>
+<h2 class="h2">Алимхан (CEO, владелец)</h2>
+<h3 class="h3">Что хорошо.</h3>
+<h3 class="h3"><strong>Что хорошо.
+</strong></h3>
+<p>Алимхан сам инициировал диагностику. Не ждал, пока станет совсем плохо. Готов смотреть на узкие места компании прямо, без защиты «у нас всё нормально». Это уже половина дела. С таким подходом дальше можно строить системный маркетинг с предсказуемым ростом, а не просто доливать рекламный бюджет в надежде, что больше денег дадут больше продаж.</p>
+<h3 class="h3"><strong>Что критично.
+</strong></h3>
+<p>В Algo Group нужен свой штатный маркетолог. Не внешний консультант, не подрядчик на аутсорсе, а свой человек, который станет держателем всей маркетинговой системы внутри компании. У него три задачи.</p>
+<p>Первая: принимать рекомендации, которые приходят извне (от нас как от экспертов по маркетингу, от подрядчиков по Google Ads и SMM, от исследований и аудитов) и превращать их в конкретные задачи для команды и подрядчиков. Сейчас входящие рекомендации либо ложатся на стол Марии (а она в продажах), либо растворяются в чатах.</p>
+<p>Вторая: передавать информацию между маркетингом и продажами в обе стороны. От Марии к Алексу и обратно, от Алимхана к команде, от подрядчиков к продажам. Сейчас весь этот контур замкнут на Марию, и она физически не успевает быть точкой обмена для всех.</p>
+<p>Третья: вести ритм еженедельных планёрок маркетинга и продаж, фиксировать решения, отслеживать их выполнение. Без этого ритма решения, принятые на стратегических сессиях, рассыпаются по операционке и не доходят до результата.</p>
+<p>При работе с внешним консультантом такой штатный маркетолог становится главной точкой контакта. Он принимает рекомендации, согласовывает их внутри команды, ставит задачи подрядчикам, отчитывается по результату. Без него консультант разговаривает с Алимханом раз в две недели, с Марией раз в две недели, а между этими встречами информация теряется. Каждый созвон начинается с восстановления контекста заново.</p>
+<p>Сегодня связь между маркетингом, продажами и подрядчиками идёт через отдельных людей (в основном через Марию), а не через общие планёрки и общие документы. Когда начнётся работа по дорожной карте, штатный маркетолог и внешние эксперты по маркетингу должны действовать в команде как единое целое. Важно, чтобы это публично обозначил собственник: их совместные решения исполняются как решения Алимхана. Иначе команда начнёт ждать прямого приказа сверху по каждому пункту, и темп быстро упадёт.</p>
+</div>
+
+<nav class="pagination">
+<a class="page-link prev" href="09-блок-1-текущая-точка-что-есть-сегодня.html"><div class="pl-label">← Назад</div><div class="pl-title">БЛОК 1. ТЕКУЩАЯ ТОЧКА: ЧТО ЕСТЬ СЕГОДНЯ?</div></a>
+<a class="page-link next" href="11-блок-3-где-ломается-связка-маркетинг-и-продажи.html"><div class="pl-label">Далее →</div><div class="pl-title">БЛОК 3. ГДЕ ЛОМАЕТСЯ СВЯЗКА «МАРКЕТИНГ И ПРОДАЖИ»</div></a>
+</nav>
+</main>
+</div>
+</body>
+</html>

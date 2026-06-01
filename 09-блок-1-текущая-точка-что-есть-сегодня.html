@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>БЛОК 1. ТЕКУЩАЯ ТОЧКА: ЧТО ЕСТЬ СЕГОДНЯ? — Algo Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#f97316;--accent-light:#fff7ed;--accent-border:#fed7aa;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:#e2e8f0;--bg:#f8fafc;--bg-card:#ffffff;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+strong{font-weight:700}
+
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* ── Sidebar ── */
+.sidebar{background:var(--text);color:#fff;padding:2rem 1.5rem;position:sticky;top:0;height:100vh;overflow-y:auto;max-height:100vh}
+@media (max-width:900px){.sidebar{position:relative;height:auto;max-height:none}}
+.brand{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;font-weight:600}
+.brand-name{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:.3rem}
+.brand-name span{color:var(--accent)}
+.brand-sub{font-size:.8rem;color:#94a3b8;margin-bottom:2rem}
+.nav{display:flex;flex-direction:column;gap:.15rem}
+.nav-item{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .85rem;border-radius:8px;color:#cbd5e1;font-size:.85rem;line-height:1.4;transition:all .15s;border-bottom:none}
+.nav-item:hover{background:rgba(255,255,255,.05);color:#fff;border-bottom:none}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-num{font-family:'Fira Code',monospace;font-size:.7rem;opacity:.7;flex-shrink:0;margin-top:.15rem;min-width:1.5rem}
+.nav-text{flex:1}
+
+/* ── Main ── */
+.main{padding:3rem 3.5rem;max-width:980px}
+@media (max-width:1100px){.main{padding:2rem 1.5rem}}
+.section-meta{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.7rem;font-family:'Fira Code',monospace}
+.section-title{font-size:2.1rem;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:2.5rem;letter-spacing:-.02em}
+@media (max-width:700px){.section-title{font-size:1.6rem}}
+
+/* ── Typography ── */
+.content p{margin-bottom:1.1rem;color:var(--text);font-size:1rem;line-height:1.75}
+.content h2.h2{font-size:1.45rem;font-weight:800;color:var(--text);margin:2.2rem 0 1rem;padding-left:.85rem;border-left:4px solid var(--accent);line-height:1.3}
+.content h3.h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:1.6rem 0 .75rem;line-height:1.35}
+.content ul.list{margin:0 0 1.3rem 0;padding-left:0;list-style:none}
+.content ul.list li{margin-bottom:.85rem;line-height:1.75;color:var(--text)}
+
+/* ── Blockquote (цитаты Алекса/Марии и т.п.) ── */
+.content blockquote.quote{margin:1.6rem 0;padding:1.1rem 1.4rem;border-left:3px solid var(--accent);background:#fafafa;border-radius:0 6px 6px 0}
+.content blockquote.quote p{margin:0 0 .5rem 0;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.6}
+.content blockquote.quote cite{display:block;font-style:normal;font-size:.88rem;color:var(--text-muted);font-weight:500}
+
+/* ── Tables ── */
+.tbl-wrap{overflow-x:auto;margin:1.5rem 0;border-radius:8px;border:1px solid var(--border);background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th{background:var(--bg);text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--text);border-bottom:2px solid var(--border)}
+.tbl td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl p{margin-bottom:.3rem}
+.tbl p:last-child{margin-bottom:0}
+
+/* ── Pagination ── */
+.pagination{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.page-link{flex:1;padding:1.1rem 1.4rem;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;border-bottom:none;color:var(--text);transition:all .15s;max-width:48%}
+.page-link:hover{border-color:var(--accent);background:var(--accent-light);border-bottom:1.5px solid var(--accent)}
+.page-link.next{margin-left:auto;text-align:right}
+.page-link .pl-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.3rem;font-family:'Fira Code',monospace}
+.page-link .pl-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4}
+
+/* ── Footer ── */
+.foot{padding:2rem 0 0;color:var(--text3);font-size:.78rem;text-align:center;border-top:1px solid var(--border);margin-top:4rem}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand-name">Algo <span>Group</span></div>
+  <nav class="nav"><a class="nav-item" href="index.html"><span class="nav-num">00</span><span class="nav-text">Содержание</span></a>
+<a class="nav-item" href="01-цель-аудита.html"><span class="nav-num">01</span><span class="nav-text">Цель аудита</span></a>
+<a class="nav-item" href="02-что-мы-сделали.html"><span class="nav-num">02</span><span class="nav-text">Что мы сделали</span></a>
+<a class="nav-item" href="03-картина-рынка-eld-в-сша-где-algo-group.html"><span class="nav-num">03</span><span class="nav-text">Картина рынка ELD в США. где ALGO GROUP</span></a>
+<a class="nav-item" href="04-стратегические-окна-что-играет-за-и-против-algo-gr.html"><span class="nav-num">04</span><span class="nav-text">Стратегические окна. что играет за и против ALGO GROUP</span></a>
+<a class="nav-item" href="05-сводный-дашборд-по-направлениям.html"><span class="nav-num">05</span><span class="nav-text">Сводный дашборд по направлениям</span></a>
+<a class="nav-item" href="06-экономика-каналов.html"><span class="nav-num">06</span><span class="nav-text">Экономика каналов</span></a>
+<a class="nav-item" href="07-4-блочный-аудит-маркетинга-и-продаж.html"><span class="nav-num">07</span><span class="nav-text">4-блочный аудит маркетинга и продаж</span></a>
+<a class="nav-item" href="08-карта-зрелости-маркетинга.html"><span class="nav-num">08</span><span class="nav-text">Карта зрелости маркетинга</span></a>
+<a class="nav-item active" href="09-блок-1-текущая-точка-что-есть-сегодня.html"><span class="nav-num">09</span><span class="nav-text">Блок 1. текущая точка: что есть сегодня?</span></a>
+<a class="nav-item" href="10-блок-2-карта-проблем-по-направлениям-и-людям.html"><span class="nav-num">10</span><span class="nav-text">Блок 2. карта проблем по направлениям и людям</span></a>
+<a class="nav-item" href="11-блок-3-где-ломается-связка-маркетинг-и-продажи.html"><span class="nav-num">11</span><span class="nav-text">Блок 3. где ломается связка «маркетинг и продажи»</span></a>
+<a class="nav-item" href="12-общий-итог-и-что-делать.html"><span class="nav-num">12</span><span class="nav-text">Общий итог и что делать?</span></a></nav>
+</aside>
+<main class="main">
+
+<div class="section-meta">Раздел 09</div>
+<h1 class="section-title">БЛОК 1. ТЕКУЩАЯ ТОЧКА: ЧТО ЕСТЬ СЕГОДНЯ?</h1>
+<div class="content">
+<h2 class="h2">1. Каждый второй лид теряется</h2>
+<p>Главное. Проблема Algo Group не в количестве лидов. Google Ads приносит 100-170 заявок в месяц, Meta добавляет ещё 70+. Лидов хватает.</p>
+<p>Проблема в том, что 40-50% этих лидов не дозваниваются.</p>
+<p>Что мы об этом знаем. По исследованию рынка US trucking, нижняя граница нормы по входящим лидам в B2B 40-60%. Algo сейчас в нижней части этой нормы. Физическая особенность рынка действительно есть, но потолок отрасли выше, и до него можно дойти.</p>
+<p>Почему мы не знаем точную причину. Сквозной аналитики нет, поэтому работаем вслепую. Есть три гипотезы: либо это особенность рынка US trucking, либо мы теряем именно тех лидов, которые могли бы стать клиентами (а отслеживать это нечем), либо конкретные рекламные кампании и креативы приводят неподходящих людей, и их стоило бы отключить. Какая из трёх работает — мы пока не знаем.</p>
+<p>В деньгах сегодня это выглядит так. Компания тратит около $5 000 в месяц на Google Ads, получает 160 заявок. Из них 80 не берут трубку. При CPL $32 это $2 500 в месяц на лидов, которые не дошли до разговора. До $30 000 в год улетают в мусорное ведро, если допустить, что эти лиды и правда были рабочими. Без сквозной аналитики мы этого не знаем.</p>
+<p>Главная гипотеза. Сейчас специалисты по рекламе ориентируются только на цену за заявку. Это, вероятнее всего, ошибка: дешёвая заявка не равна продаже. На рекламном аукционе самые дешёвые показы достаются самой нецелевой аудитории. Возможно, Algo экономит на стоимости заявки, но переплачивает на её результате.</p>
+<blockquote class="quote"><p>«Я сам по себе делаю рекламу, они сами по себе что-то пытаются продать»</p><cite>Алекс, специалист по рекламе</cite></blockquote>
+<h3 class="h3">Итог.</h3>
+<p>Если поднять дозвон с 50% до 65-70%, это плюс 30-40% к конвертируемой базе без дополнительных затрат на рекламу. На горизонте года, это плюс 200-300 продаж по той же экономике канала. Но прежде чем рваться к этой цифре, нужно понять, теряем ли мы реальных клиентов или отбраковываем мусорную аудиторию. Ответ даст сквозная аналитика за 2-6 месяцев работы.</p>
+<h2 class="h2">2. Маркетинг как чёрный ящик. Никто не знает, какой канал приносит деньги</h2>
+<p>Сквозной аналитики нет.</p>
+<p>RingCentral есть как телефония. Звонки и SMS идут. А коллтрекинга, то есть атрибуции звонков к рекламным каналам, нет. Это две разные вещи. RingCentral позволяет звонить и принимать. Коллтрекинг показывает, с какого объявления, ключевого слова или канала пришёл каждый звонок. Сейчас этого нет, звонки с рекламы нигде не фиксируются как источник.</p>
+<p>Алекс видит только: бюджет, количество лидов, CPL, SEO-позиции. Сколько продаж дал Google Ads, не знает. Рекорд в апреле, 170+ заявок за всю историю рекламы. Эффект на продажи, «не знаем».</p>
+<p>Была когда-то большая таблица: клики, конверсии, цена клика, продажи. Заполнялась 1-2 месяца, потом забросили.</p>
+<p>Маркетинг не знает и не работает на выручку.</p>
+<h3 class="h3">Итог.</h3>
+<p>Владелец и команда не видят «единого экрана правды». Нельзя ответить на три простых вопроса. Какой канал масштабировать? Какой отключить? Сколько реально стоит один оплативший клиент?</p>
+<p>Без сквозной аналитики мы будем масштабировать друшлаг. Сначала фундамент, потом стены, потом масштабирование.</p>
+<h2 class="h2">3. Маркетинг и продажи живут в разных вселенных. Связки нет</h2>
+<h3 class="h3">Конкретные факты:</h3>
+<ul class="list">
+<li>Совместных звонков с отделом продаж нет.</li>
+<li>Обратная связь только по запросу, не системная. Раз в две недели Алекс спрашивает про качество лидов. Ответ обычно: «да, то же самое».</li>
+<li>Доступа к CRM нет. Воронку продаж не видит. Не знает, сколько продаж в месяц, какие штаты дают деньги, кто клиенты по профилю.</li>
+<li>Алексу дали сайт и список конкурентов. «Это было всё». Не знал про 3 сегмента клиентов (50-150 / 150-400 / 500+ миль). Не знал, что главная причина выбора, рекомендация плюс сервис. Делает сайт и рекламу по конкурентам, а не по данным о клиентах.</li>
+<li>Задачи маркетингу не ставят исходя из целей бизнеса. Нет плана: «мне нужно 200 лидов из Segment 3 в таких-то штатах». Маркетинг гонит количество, продажи говорят, что адекватных среди них мало, но конкретики никто не даёт.</li>
+</ul>
+<h3 class="h3">Итог.</h3>
+<p>Маркетинг и продажи живут как два отдельных структуры внутри бизнеса. Нет обратной связи, нет общих целей, нет общего языка. Маркетолог «слеп» по продукту и клиентам.</p>
+<h2 class="h2">4. Подрядчики на аутсорсе работают сами по себе</h2>
+<p>Алекс ведёт Google Ads и SEO. Цена 1 000 долларов в месяц фикс. Параллельно ведёт ещё 3+ проекта в США. Algo Group для него один из четырёх. Без процента от результата.</p>
+<p>SMM-агентство из Узбекистана ведёт Meta и Instagram с апреля 2026. Новенькие. Без брифинга по продукту и аудитории. UTM-меток на ссылках нет, поэтому невозможно отследить путь лида после формы.</p>
+<p>AI-сервис Call to Action делает обзвоны. 1 продажа за всё время.</p>
+<p>Что общее у всех троих: никто не получил глубокого ресёрча ЦА. Никто не подключён к CRM. Никто не ориентирован на рекламные связки, которые приносят продажи. Все отвечают только за объём лидов.</p>
+<h3 class="h3">Итог.</h3>
+<p>Подрядчики либо встраиваются в команду с прозрачным KPI и регулярными синками, либо заменяются. Сейчас никто из троих не встроен. Это управленческий долг, который растёт.</p>
+<h2 class="h2">5. Сайт не убеждает. Среднее время 30 секунд</h2>
+<p>По данным аудита сайта factoreld.com через GA4:</p>
+<ul class="list">
+<li>Среднее время на сайте: 30 секунд. Норма для B2B: 2+ минуты.</li>
+<li>Показатель отказов: 63%. Норма до 50-55%.</li>
+<li>Desktop engagement rate: 22 секунды, 26.89%. Это критически низко.</li>
+<li>60% трафика на сайт приходит с мобильных. Мобильная вёрстка технически работает (страница открывается, форма заполняется), но сайт не проходит тест Google PageSpeed Insights (бесплатный инструмент Google для проверки скорости сайта по адресу pagespeed.web.dev, даёт оценку 0-100 баллов). Это значит, что Google считает factoreld.com медленным. Три прямых последствия: 1) Google понижает сайт в поисковой выдаче, и Алекс не может вырасти в топ по SEO; 2) часть посетителей уходит до загрузки страницы (особенно на мобильном интернете в дороге); 3) Google Ads берёт больше денег за клик из-за низкого Quality Score (оценки качества лендинга).</li>
+</ul>
+<p>Посетитель приходит, смотрит 30 секунд, уходит. Для ELD-решения за $109-199 в месяц, которое нужно интегрировать в бизнес, 30 секунд это вообще ни о чём.</p>
+<p>По визуалу: стоковые фото по всему сайту, «жизни» компании не видно. Нет видео с реальными водителями, нет отзывов, нет FAQ. Главные преимущества (24/7 поддержка, audit handling, free trial) на сайте теряются.</p>
+<p>Главная мысль: реклама и сайт должны быть конгруентны. Триггер в объявлении равно боль на посадке равно решение в продукте. Сейчас этого нет. Алекс делает сайт по конкурентам, не зная Aha Moment клиентов. Маркетинг работает «на всех», а не на конкретные сегменты с конкретными болями.</p>
+<h3 class="h3">Итог.</h3>
+<p>Сайт это последнее касание перед формой. Сейчас он работает как фильтр, который отсеивает половину горячего трафика. Точка приложения: разделить на 3 лендинга по сегментам (Local / Regional / OTR), переписать с реальных болей клиентов (Aha Moment Audit &amp; Compliance 39%, 24/7 поддержка 22%, скрытые цены 14%), добавить видео и реальные отзывы.</p>
+<h2 class="h2">6. Meta: 70+ лидов в месяц, ноль продаж</h2>
+<p>CPL по Meta $8.51. Для ниши trucking в США это хороший результат. UGC-креативы работают. За месяц 95 лидов за $927.</p>
+<p>Ни один не дошёл до денег.</p>
+<p>Причины. Все системные, не разовые:</p>
+<ul class="list">
+<li>Нет UTM-меток. Путь лида после формы отследить невозможно.</li>
+<li>2 группы объявлений с одинаковым таргетингом конкурируют друг с другом.</li>
+<li>6 из 8 креативов получили меньше 100 показов. Не протестированы.</li>
+<li>Meta приводит лидов на Safety (новичков, у которых ELD пока не нужен 6-7 месяцев), а не на ELD.</li>
+</ul>
+<h3 class="h3">Итог.</h3>
+<p>Канал даёт объём, но сливает бюджет без конверсии в деньги. Проблема не только в структуре кампаний и UTM-метках. Это ещё и канал, который не оптимален для целевой аудитории. Точка приложения: либо переориентация на Telegram-каналы и YouTube-инфлюенсеров, либо полная перестройка Meta под Safety-сегмент.</p>
+<h2 class="h2">7. Маркетинг работает вслепую по продукту. ABCD-квалификация отсутствует</h2>
+<h3 class="h3">Алекс не знает:</h3>
+<ul class="list">
+<li>Про 3 сегмента клиентов</li>
+<li>Про ценовые пакеты ($29 / $79 / $109-199).</li>
+<li>Про Aha Moment: 39% выбирают из-за Audit &amp; Compliance поддержки, 22% из-за персонализированной поддержки 24/7, 14% уходят к Algo от конкурентов из-за скрытых цен.</li>
+<li>Про Top Pain Points клиентов: 22% «нет редактирования часов», 17% нарушения HOS, 14% скрытые цены у конкурентов.</li>
+</ul>
+<p>Делает рекламу по анализу конкурентов, а не по данным о клиентах. Сам признаёт: «мы слепы».</p>
+<p>Отдельная история, квалификация лидов. Сейчас 3 пресейла работают с холодными лидами на 29 долларов тем же скриптом и тратят столько же времени, сколько на горячих лидах на 199 долларов. Подробное описание системы ABCD-сегментации (по ценности и температуре) приведено в конце документа, в разделе перед дорожной картой. Если упаковать продукт под 3 сегмента и развести скрипты под каждый, это даст рост конверсии на той же команде, без увеличения бюджета.</p>
+<h3 class="h3">Итог.</h3>
+<p>Маркетинговые материалы не доводят клиента от интереса до заявки и от заявки до доверия. Реклама настроена «на всех». Если упаковать продукт под 3 сегмента с конкретными болями, сделать ABCD-квалификацию с разными воронками, это даст плюс к конверсии без увеличения бюджета.</p>
+<h2 class="h2">8. Продуктовая линейка без лестницы ценностей</h2>
+<p>Любой продукт должен жить в лестнице ценностей. Лид-магнит, трипвайер, основной продукт, апселл, повторные покупки. У Algo сейчас этого нет. Есть только основной продукт ELD по трём ценам.</p>
+<p>Free Trial, который Мария сама запустила, дал прорывные данные. Клиенты с FT подключают в 3 раза больше траков (6 против 2). LTV резко выше. Это классический трипвайер. Низкий риск, низкий чек, переход в основной продукт.</p>
+<p>Но FT не оформлен как канал. Им пользуется 46% подписок, остальные 54% подписываются без него. Если поднять FT-долю до 70-80%, это значительный рост LTV без других вложений.</p>
+<h3 class="h3">Что ещё отсутствует:</h3>
+<ul class="list">
+<li>Лид-магнита нет. Должен быть полезный артефакт, который собирает базу холодных. Например, гайд «Как пройти New Entrant Safety Audit» или калькулятор экономии на страховке.</li>
+<li>Реферальной программы как системы нет. Часть клиентов приходит по сарафану (главный канал по выручке), но это не управляется.</li>
+</ul>
+<h3 class="h3">Итог.</h3>
+<p>Если Algo выстроит полную лестницу, CAC останется тем же, а LTV вырастет в 1.5-2 раза. Это второй главный рычаг (после починки дозвона).</p>
+</div>
+
+<nav class="pagination">
+<a class="page-link prev" href="08-карта-зрелости-маркетинга.html"><div class="pl-label">← Назад</div><div class="pl-title">КАРТА ЗРЕЛОСТИ МАРКЕТИНГА</div></a>
+<a class="page-link next" href="10-блок-2-карта-проблем-по-направлениям-и-людям.html"><div class="pl-label">Далее →</div><div class="pl-title">БЛОК 2. КАРТА ПРОБЛЕМ ПО НАПРАВЛЕНИЯМ И ЛЮДЯМ</div></a>
+</nav>
+</main>
+</div>
+</body>
+</html>

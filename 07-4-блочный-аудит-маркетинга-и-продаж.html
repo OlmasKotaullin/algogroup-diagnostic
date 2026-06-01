@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>4-БЛОЧНЫЙ АУДИТ МАРКЕТИНГА И ПРОДАЖ — Algo Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#f97316;--accent-light:#fff7ed;--accent-border:#fed7aa;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:#e2e8f0;--bg:#f8fafc;--bg-card:#ffffff;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--bg);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+strong{font-weight:700}
+
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* ── Sidebar ── */
+.sidebar{background:var(--text);color:#fff;padding:2rem 1.5rem;position:sticky;top:0;height:100vh;overflow-y:auto;max-height:100vh}
+@media (max-width:900px){.sidebar{position:relative;height:auto;max-height:none}}
+.brand{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;font-weight:600}
+.brand-name{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:.3rem}
+.brand-name span{color:var(--accent)}
+.brand-sub{font-size:.8rem;color:#94a3b8;margin-bottom:2rem}
+.nav{display:flex;flex-direction:column;gap:.15rem}
+.nav-item{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .85rem;border-radius:8px;color:#cbd5e1;font-size:.85rem;line-height:1.4;transition:all .15s;border-bottom:none}
+.nav-item:hover{background:rgba(255,255,255,.05);color:#fff;border-bottom:none}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-num{font-family:'Fira Code',monospace;font-size:.7rem;opacity:.7;flex-shrink:0;margin-top:.15rem;min-width:1.5rem}
+.nav-text{flex:1}
+
+/* ── Main ── */
+.main{padding:3rem 3.5rem;max-width:980px}
+@media (max-width:1100px){.main{padding:2rem 1.5rem}}
+.section-meta{font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.7rem;font-family:'Fira Code',monospace}
+.section-title{font-size:2.1rem;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:2.5rem;letter-spacing:-.02em}
+@media (max-width:700px){.section-title{font-size:1.6rem}}
+
+/* ── Typography ── */
+.content p{margin-bottom:1.1rem;color:var(--text);font-size:1rem;line-height:1.75}
+.content h2.h2{font-size:1.45rem;font-weight:800;color:var(--text);margin:2.2rem 0 1rem;padding-left:.85rem;border-left:4px solid var(--accent);line-height:1.3}
+.content h3.h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:1.6rem 0 .75rem;line-height:1.35}
+.content ul.list{margin:0 0 1.3rem 0;padding-left:0;list-style:none}
+.content ul.list li{margin-bottom:.85rem;line-height:1.75;color:var(--text)}
+
+/* ── Blockquote (цитаты Алекса/Марии и т.п.) ── */
+.content blockquote.quote{margin:1.6rem 0;padding:1.1rem 1.4rem;border-left:3px solid var(--accent);background:#fafafa;border-radius:0 6px 6px 0}
+.content blockquote.quote p{margin:0 0 .5rem 0;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.6}
+.content blockquote.quote cite{display:block;font-style:normal;font-size:.88rem;color:var(--text-muted);font-weight:500}
+
+/* ── Tables ── */
+.tbl-wrap{overflow-x:auto;margin:1.5rem 0;border-radius:8px;border:1px solid var(--border);background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem}
+.tbl th{background:var(--bg);text-align:left;padding:.85rem 1rem;font-weight:700;color:var(--text);border-bottom:2px solid var(--border)}
+.tbl td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl p{margin-bottom:.3rem}
+.tbl p:last-child{margin-bottom:0}
+
+/* ── Pagination ── */
+.pagination{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.page-link{flex:1;padding:1.1rem 1.4rem;background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;border-bottom:none;color:var(--text);transition:all .15s;max-width:48%}
+.page-link:hover{border-color:var(--accent);background:var(--accent-light);border-bottom:1.5px solid var(--accent)}
+.page-link.next{margin-left:auto;text-align:right}
+.page-link .pl-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:.3rem;font-family:'Fira Code',monospace}
+.page-link .pl-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.4}
+
+/* ── Footer ── */
+.foot{padding:2rem 0 0;color:var(--text3);font-size:.78rem;text-align:center;border-top:1px solid var(--border);margin-top:4rem}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand-name">Algo <span>Group</span></div>
+  <nav class="nav"><a class="nav-item" href="index.html"><span class="nav-num">00</span><span class="nav-text">Содержание</span></a>
+<a class="nav-item" href="01-цель-аудита.html"><span class="nav-num">01</span><span class="nav-text">Цель аудита</span></a>
+<a class="nav-item" href="02-что-мы-сделали.html"><span class="nav-num">02</span><span class="nav-text">Что мы сделали</span></a>
+<a class="nav-item" href="03-картина-рынка-eld-в-сша-где-algo-group.html"><span class="nav-num">03</span><span class="nav-text">Картина рынка ELD в США. где ALGO GROUP</span></a>
+<a class="nav-item" href="04-стратегические-окна-что-играет-за-и-против-algo-gr.html"><span class="nav-num">04</span><span class="nav-text">Стратегические окна. что играет за и против ALGO GROUP</span></a>
+<a class="nav-item" href="05-сводный-дашборд-по-направлениям.html"><span class="nav-num">05</span><span class="nav-text">Сводный дашборд по направлениям</span></a>
+<a class="nav-item" href="06-экономика-каналов.html"><span class="nav-num">06</span><span class="nav-text">Экономика каналов</span></a>
+<a class="nav-item active" href="07-4-блочный-аудит-маркетинга-и-продаж.html"><span class="nav-num">07</span><span class="nav-text">4-блочный аудит маркетинга и продаж</span></a>
+<a class="nav-item" href="08-карта-зрелости-маркетинга.html"><span class="nav-num">08</span><span class="nav-text">Карта зрелости маркетинга</span></a>
+<a class="nav-item" href="09-блок-1-текущая-точка-что-есть-сегодня.html"><span class="nav-num">09</span><span class="nav-text">Блок 1. текущая точка: что есть сегодня?</span></a>
+<a class="nav-item" href="10-блок-2-карта-проблем-по-направлениям-и-людям.html"><span class="nav-num">10</span><span class="nav-text">Блок 2. карта проблем по направлениям и людям</span></a>
+<a class="nav-item" href="11-блок-3-где-ломается-связка-маркетинг-и-продажи.html"><span class="nav-num">11</span><span class="nav-text">Блок 3. где ломается связка «маркетинг и продажи»</span></a>
+<a class="nav-item" href="12-общий-итог-и-что-делать.html"><span class="nav-num">12</span><span class="nav-text">Общий итог и что делать?</span></a></nav>
+</aside>
+<main class="main">
+
+<div class="section-meta">Раздел 07</div>
+<h1 class="section-title">4-БЛОЧНЫЙ АУДИТ МАРКЕТИНГА И ПРОДАЖ</h1>
+<div class="content">
+<h2 class="h2">Блок 1. Отдел продаж. Оценка 6/10</h2>
+<h3 class="h3">Что работает:</h3>
+<ul class="list">
+<li>8 человек в структуре (5 сейлзов + 3 пресейла). Команда есть.</li>
+<li>Ежедневные стендапы 10-15 минут. РНП в зачаточной форме.</li>
+<li>Конверсия 2.2% (MQL 2.8%). По бенчмаркам B2B SaaS медиана 1.1%, у Algo выше.</li>
+<li>CRM (Kommo) подключён, телефония RingCentral работает.</li>
+<li>2 звонка плюс SMS, email, Telegram, Facebook DM понятна цепочка касаний.</li>
+</ul>
+<h3 class="h3">Что критично:</h3>
+<ul class="list">
+<li>Скорость обработки заявок не замеряется. По бенчмаркам ответ &lt;5 минут даёт ×8-21 эффект на конверсию. - ABCD-квалификации лидов нет.</li>
+<li>Регулярного 1-on-1 у Марии с командой марктеинга нет.</li>
+</ul>
+<p><strong>Главный вывод по блоку.</strong> Команда есть, регулярного менеджмента с отделом маркетинга нет. Точка приложения: SLA 5 минут, power dialer (программа автонабора номеров для пресейлов), ABCD-квалификация, перевод автоматически заявок в CRM(важно для сквозной аналитики).</p>
+<h2 class="h2">Блок 3. Фанел-маркетинг. Оценка 3/10</h2>
+<h3 class="h3">Что работает:</h3>
+<ul class="list">
+<li>Free Trial как трипвайер. 46% подписок через FT. Клиенты с FT подключают в 3 раза больше траков (6 vs 2). LTV резко выше.</li>
+<li>Aha Moment известен по CustDev: 39% Audit &amp; Compliance, 22% 24/7 поддержка, 14% открытые цены.</li>
+<li>Top Pain Points известны: 22% «нет редактирования часов», 17% HOS-нарушения, 14% скрытые цены у конкурентов.</li>
+</ul>
+<h3 class="h3">Что критично:</h3>
+<ul class="list">
+<li>Лестницы ценностей нет. Лид-магнита нет (база холодных не собирается).</li>
+<li>Реферальной программы как системы нет, хотя «рекомендация друга», главный канал по выручке. Бенчмарк рынка: 20% recurring commission на 12-24 месяца.</li>
+<li>Конгруентности нет. Триггер в рекламе ≠ боль на лендинге ≠ решение в продукте. Один лендинг factoreld.com/#pricing на все сегменты.</li>
+<li>Контент-машины нет. Регулярного производства нет. Сегмент C (холодные) не прогревается.</li>
+<li>Aha Moment не используется в рекламе и на сайте.</li>
+</ul>
+<p><strong>Главный вывод по блоку.</strong> Продукт сильный, упаковка слабая. Точка приложения: 3 лендинга под сегменты (Local / Regional / OTR), лид-магнит, поднять долю FT с 46% до 70%, упаковать апселл-цепочку.</p>
+<h2 class="h2">Блок 4. Отдел трафика. Оценка 3/10 (по совокупности 10 этапов)</h2>
+<p>10-этапный аудит трафика.</p>
+<p><strong>Этап 1. Какие каналы привлекают клиентов?</strong> Работают. Google Ads на $5 000 в месяц, Meta на $927 в месяц, поисковое продвижение (SEO) растёт, сайт на Tilda, AI-сервис обзвона лидов.</p>
+<p><strong>Этап 2. Сколько стоит одна заявка с каждого канала?</strong> Считается. Google $32 за заявку, Meta $8.51. По рынку $84 в B2B и $85 в промышленности. Algo получает заявки в 2-3 раза дешевле.</p>
+<p><strong>Этап 3. Видна ли вся цепочка от рекламы до денег?</strong> Не настроена. Сквозной аналитики (Roistat или аналог) нет.</p>
+<p><strong>Этап 4. Связь звонков с рекламой.</strong> Не работает. Телефония RingCentral подключена, но к какому каналу относится каждый звонок неизвестно.</p>
+<p><strong>Этап 5. Тестирование рекламных объявлений.</strong> Не выстроено. 6 из 8 объявлений получили меньше 100 показов, аудитория не успела отреагировать.</p>
+<p><strong>Этап 6. Контроль работы подрядчиков.</strong> Не настроен. Алекс ведёт ещё 3 проекта параллельно, фикс $1 000 в месяц без процента от результата. SMM-агентство работает без брифинга. AI-сервис обзвона за всё время дал 1 продажу.</p>
+<p><strong>Этап 7. Метки источников трафика (UTM).</strong> Частично. Видны в Telegram-чате (source=google, medium=cpc), но на других каналах меток нет. Meta идёт без меток вообще.</p>
+<p><strong>Этап 8. На каком этапе теряются клиенты по каждому каналу?</strong> Не отслеживается. Где какой канал сливается, неизвестно.</p>
+<p><strong>Этап 9. Сравнение с показателями рынка.</strong> Появилось сейчас (через наше исследование). До этого Algo работал без рыночных ориентиров.</p>
+<p><strong>Этап 10. Управление бюджетом по каналам.</strong> Не выстроено. Возврат от рекламы по каналам (ROMI) не считается.</p>
+<p>Итого настроено 2 этапа из 10, частично 1, не настроено 7.</p>
+<p><strong>Главный вывод по блоку.</strong> Трафик работает дешевле рынка. Но без аналитики и контроля подрядчиков это бюджет, который льётся в чёрный ящик. Что чинить в первую очередь: коллтрекинг и сквозная аналитика, брифинг для подрядчиков, регулярные синхронизации с отделом продаж.</p>
+<h3 class="h3">Сводка по 4 блокам.</h3>
+<ul class="list">
+<li>Блок 1 (продажи): 6/10. Опираемся на Марию, но нужен регулярный менеджмент и ABCD.</li>
+<li>Блок 2 (юнит-эконом). CAC 2 945 долларов, LTV Standard 1 962 доллара.</li>
+<li>Блок 3 (воронка/фанал): 3/10. Главная зона роста через лестницу ценностей.</li>
+<li>Блок 4 (трафик): 3/10. Аналитика и управление подрядчиками, фундамент, без которого масштабирование невозможно.</li>
+</ul>
+<p>Сначала фундамент (аналитика, связка, регулярный менеджмент), потом стены (лестница ценностей, ABCD, сегментация), потом масштабирование. Не наоборот.</p>
+</div>
+
+<nav class="pagination">
+<a class="page-link prev" href="06-экономика-каналов.html"><div class="pl-label">← Назад</div><div class="pl-title">ЭКОНОМИКА КАНАЛОВ</div></a>
+<a class="page-link next" href="08-карта-зрелости-маркетинга.html"><div class="pl-label">Далее →</div><div class="pl-title">КАРТА ЗРЕЛОСТИ МАРКЕТИНГА</div></a>
+</nav>
+</main>
+</div>
+</body>
+</html>
